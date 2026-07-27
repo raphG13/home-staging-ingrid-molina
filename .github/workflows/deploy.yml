@@ -24,3 +24,5 @@ jobs:
             **/.git*/**
             **/.github/**
             **/README.md
+            **/CLAUDE.md
+            **/_archive_*
