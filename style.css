@@ -166,11 +166,6 @@ img {
     letter-spacing: 1px;
 }
 
-.header:not(.scrolled) .logo,
-.header:not(.scrolled) .nav a:not(.btn) {
-    color: var(--white);
-}
-
 .nav {
     display: flex;
     align-items: center;
@@ -201,38 +196,25 @@ img {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-}
-
-.hero-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-.hero-bg img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%);
+    /* Fond toile de lin beige + voile clair pour la lisibilité du texte */
+    background-color: #EFE8DB;
+    background-image:
+        linear-gradient(rgba(248, 244, 236, 0.42), rgba(248, 244, 236, 0.28)),
+        url("assets/fond_lin_accueil.jpg");
+    background-size: cover;
+    background-position: center;
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    color: var(--white);
-    max-width: 800px;
-    margin: 0;
+    color: var(--text-main);
+    width: 100%;
+    text-align: left;
+}
+
+.hero-cta {
+    text-align: center;
 }
 
 .hero-content .subtitle {
@@ -242,21 +224,53 @@ img {
     text-transform: uppercase;
     letter-spacing: 4px;
     margin-bottom: 24px;
-    color: #E2D7C8;
+    color: var(--primary-dark);
 }
 
 .hero-content h1 {
-    color: var(--white);
-    font-size: 72px;
+    color: var(--text-main);
     margin-bottom: 24px;
+    line-height: 1.2;
+}
+
+.hero-content h1 .hero-line {
+    display: block;
+    white-space: nowrap;
+    font-size: clamp(18px, 5.2vw, 72px);
+}
+
+@media (max-width: 360px) {
+    .hero-content h1 .hero-line {
+        white-space: normal;
+        font-size: clamp(22px, 7vw, 32px);
+    }
 }
 
 .hero-content p {
     font-size: 20px;
     margin-bottom: 40px;
-    opacity: 0.9;
+    color: var(--text-muted);
     max-width: 600px;
     font-weight: 300;
+}
+
+.hero-content .hero-lead {
+    font-weight: 700;
+    color: var(--text-main);
+    white-space: normal;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: clamp(15px, 2.4vw, 20px);
+    text-align: center;
+}
+
+@media (min-width: 1200px) {
+    .hero-content .hero-lead {
+        white-space: nowrap;
+        max-width: none;
+        font-size: 20px;
+    }
 }
 
 /* ==========================================================================
@@ -483,6 +497,99 @@ img {
     color: var(--primary-dark);
 }
 
+/* --- Cartes « Expériences » --- */
+.experiences-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.experience-step {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 18px;
+}
+
+.experience-subtitle {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--text-main);
+    margin-bottom: 20px;
+}
+
+.experience-note {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-top: -16px;
+    margin-bottom: 28px;
+}
+
+.experience-tagline {
+    font-style: italic;
+    color: var(--primary-dark);
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.experience-includes {
+    list-style: none;
+    text-align: left;
+    margin: 0 auto 28px;
+    max-width: 360px;
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.experience-includes li {
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 8px;
+}
+
+.experience-includes li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.experience-price {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 28px;
+}
+
+.experience-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px dashed rgba(155, 138, 114, 0.45);
+    box-shadow: none;
+    min-height: 260px;
+}
+
+.experience-placeholder:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: rgba(155, 138, 114, 0.7);
+}
+
+.experience-placeholder p {
+    margin-bottom: 0;
+}
+
 /* ==========================================================================
    Gallery Section
    ========================================================================== */
@@ -550,6 +657,13 @@ img {
 .gallery-item:hover .gallery-overlay h4,
 .gallery-item:hover .gallery-overlay p {
     transform: translateY(0);
+}
+
+/* Réalisations : mêmes cartes que la galerie, 2 colonnes centrées */
+.realisations-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 760px;
+    margin: 0 auto;
 }
 
 /* ==========================================================================
@@ -822,7 +936,6 @@ img {
     .about-main { margin-bottom: 24px; }
     .about-image .image-wrapper { min-height: 460px; }
     .insight-layout { grid-template-columns: 1fr; }
-    .hero-content h1 { font-size: 56px; }
     .contact h2, .gallery h2, .services-section h2, .about h2, .whoami h2, .partners h2 { font-size: 36px; }
 }
 
@@ -888,8 +1001,43 @@ img {
     .insight-grid { grid-template-columns: 1fr; }
     .insight-box { padding: 24px; }
     .insight-box h3 { font-size: 26px; }
-    .hero-content h1 { font-size: 42px; }
     .section { padding: 60px 0; }
     .contact-form { padding: 32px 24px; }
     .footer-content { flex-direction: column; gap: 24px; text-align: center; }
+}
+
+/* ==========================================================================
+   Bouton retour en haut
+   ========================================================================== */
+.back-to-top {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 90;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 22px;
+    line-height: 1;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: var(--transition);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: var(--primary-dark);
+    transform: translateY(-3px);
 }
