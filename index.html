@@ -464,6 +464,18 @@
     <!-- Retour en haut de page -->
     <a href="#accueil" class="back-to-top" aria-label="Remonter en haut de page">↑</a>
 
+    <!-- Lightbox (zoom photo au clic) -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <button class="lightbox-close" aria-label="Fermer l'image">&times;</button>
+        <figure class="lightbox-figure">
+            <img src="" alt="">
+            <figcaption>
+                <h4></h4>
+                <p></p>
+            </figcaption>
+        </figure>
+    </div>
+
     <!-- Scripts -->
     <script>
         // Intersection Observer for scroll animations
@@ -518,6 +530,46 @@
                 mobileBtn.classList.remove('active');
                 nav.classList.remove('active');
             });
+        });
+
+        // Lightbox : zoom photo au clic sur les galeries
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+        const lightboxTitle = lightbox.querySelector('h4');
+        const lightboxText = lightbox.querySelector('p');
+        const lightboxClose = lightbox.querySelector('.lightbox-close');
+
+        function openLightbox(item) {
+            const img = item.querySelector('img');
+            const title = item.querySelector('.gallery-overlay h4');
+            const text = item.querySelector('.gallery-overlay p');
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightboxTitle.textContent = title ? title.textContent : '';
+            lightboxText.textContent = text ? text.textContent : '';
+            lightbox.classList.add('active');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            lightbox.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('.gallery-item').forEach((item) => {
+            item.addEventListener('click', () => openLightbox(item));
+        });
+
+        lightboxClose.addEventListener('click', closeLightbox);
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
         });
     </script>
 </body>
