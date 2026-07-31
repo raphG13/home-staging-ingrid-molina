@@ -676,6 +676,19 @@ img {
     margin: 0 auto;
 }
 
+.realisations .section-header {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.realisations .section-header p {
+    color: var(--text-muted);
+    font-size: 18px;
+    margin-top: 16px;
+    line-height: 1.6;
+}
+
 /* Lightbox : zoom photo au clic */
 .lightbox {
     position: fixed;
